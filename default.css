@@ -1,0 +1,119 @@
+BODY { 
+color: white; 
+background: black;
+font-family: Verdana, Arial, sans-serif;
+font-size: 11px;
+margin-left: 0px; 
+margin-top:  0px; 
+margin-right: 0px;
+margin-bottom: 0px;
+}
+
+th {
+ font-size: 11px;	
+ font-weight: bold;
+}
+
+td {
+ color: white;
+ font-weight: normal;
+ /*white-space: nowrap;*/
+ white-space: normal;
+ font-family: Verdana, Arial, Helvetica, sans-serif; 
+ font-size: 10px;
+}
+
+
+.category {
+  border: 1pt solid	green ;
+  font-weight: bold;
+  font-size: 11px;
+  border-left : none ;
+  border-bottom:none ;
+}
+
+
+.result {
+  border: 1pt solid	green ;
+  border-left : none ;
+  border-bottom:none ;
+}
+table.result {
+  margin-left: 5pt;
+  border: none;
+}
+
+td.result {
+ padding: 1pt 4pt 2pt 4pt;
+}
+
+th.result {
+ text-align: center;
+ padding: 1pt 4pt 2pt 4pt;
+}
+
+th.result_title {
+ font-size: 12px;
+ text-align: left;
+ color: yellow;
+ border: 1pt none	green ;
+}
+
+
+
+a.category{
+ border: none ;
+ color: cyan;
+ text-decoration: none;
+ font-weight: bold;
+}
+
+a.result{
+ border: none ;
+ color: cyan;
+ text-decoration: none;
+ font-weight: bold;
+}
+
+a.alert{
+  font-size: 12px;
+  color: red;
+}
+
+a.action{
+  font-size: 11px;
+  font-weight: bold;
+  border: 1pt ;
+  border-style: outset ;
+  color: cyan;
+  text-decoration: none;
+  background-color: DarkSlateGray ; 
+}
+
+a.action_red{
+  font-size: 11px;
+  font-weight: bold;
+  border: 1pt ;
+  color: red;
+  text-decoration: blink;
+  text-decoration: none;
+  border-style: outset ;
+  background-color: DarkRed; 
+}
+
+
+a:hover {
+  color: black;
+  background-color:#FFFFFF; 
+}
+
+
+img       {border: none;}
+img:hover {border-color: red;} 
+
+
+li.urgent {
+ color: yellow;
+}
+
+
