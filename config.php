@@ -42,8 +42,8 @@ $homename	= "Tennis Tour&nbsp;$version";
 $admin_email="eugene@cyrilcanada.com";
 ################################# DATABASE
 $db_type	= "mysql";	# postgresql or mysql
-$db_base	= "cyrilca_tennis";
-$db_user	= "cyrilca_eugene";
+$db_base	= "tennis";
+$db_user	= "eugene";
 $db_pass	= "public";
 //$db_user	= "root";
 //$db_pass	= "";

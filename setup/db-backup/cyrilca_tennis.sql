@@ -7,28 +7,29 @@
 -- Server version: 4.1.15
 -- PHP Version: 5.1.6
 -- 
--- Database: `cyrilca_tennis`
+-- Database: cyrilca_tennis
 -- 
 
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `doubles`
+-- Table structure for table doubles
 -- 
+use tennis;
 
-DROP TABLE IF EXISTS `doubles`;
-CREATE TABLE IF NOT EXISTS `doubles` (
-  `id` int(10) unsigned NOT NULL default '0' COMMENT 'foreign key to player.id',
-  `player1_id` int(10) unsigned NOT NULL default '0',
-  `player2_id` int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (`id`)
+DROP TABLE IF EXISTS doubles;
+CREATE TABLE IF NOT EXISTS doubles (
+  id int(10) unsigned NOT NULL default '0' COMMENT 'foreign key to player.id',
+  player1_id int(10) unsigned NOT NULL default '0',
+  player2_id int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- 
--- Dumping data for table `doubles`
+-- Dumping data for table doubles
 -- 
 
-INSERT INTO `doubles` (`id`, `player1_id`, `player2_id`) VALUES 
+INSERT INTO doubles (id, player1_id, player2_id) VALUES 
 (32, 3, 13),
 (30, 1, 10),
 (33, 2, 13),
@@ -37,23 +38,23 @@ INSERT INTO `doubles` (`id`, `player1_id`, `player2_id`) VALUES
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `draws`
+-- Table structure for table draws
 -- 
 
-DROP TABLE IF EXISTS `draws`;
-CREATE TABLE IF NOT EXISTS `draws` (
-  `event_id` int(10) unsigned NOT NULL default '0',
-  `player_id` int(10) unsigned NOT NULL default '0',
-  `slot` int(11) NOT NULL default '0',
-  `seed` int(11) default NULL,
-  PRIMARY KEY  (`player_id`,`event_id`)
+DROP TABLE IF EXISTS draws;
+CREATE TABLE IF NOT EXISTS draws (
+  event_id int(10) unsigned NOT NULL default '0',
+  player_id int(10) unsigned NOT NULL default '0',
+  slot int(11) NOT NULL default '0',
+  seed int(11) default NULL,
+  PRIMARY KEY  (player_id,event_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- 
--- Dumping data for table `draws`
+-- Dumping data for table draws
 -- 
 
-INSERT INTO `draws` (`event_id`, `player_id`, `slot`, `seed`) VALUES 
+INSERT INTO draws (event_id, player_id, slot, seed) VALUES 
 (6, 1, 0, NULL),
 (11, 1, 0, NULL),
 (12, 1, 0, NULL),
@@ -81,32 +82,31 @@ INSERT INTO `draws` (`event_id`, `player_id`, `slot`, `seed`) VALUES
 (15, 21, 1, 1),
 (15, 35, 2, NULL);
 
--- --------------------------------------------------------
 
 -- 
--- Table structure for table `events`
+-- Table structure for table events
 -- 
 
-DROP TABLE IF EXISTS `events`;
-CREATE TABLE IF NOT EXISTS `events` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `type` enum('robin','tree','ongoing','robin+tree') NOT NULL default 'robin',
-  `tour_id` int(10) unsigned NOT NULL default '0',
-  `title` varchar(40) NOT NULL default '',
-  `starts` date NOT NULL default '0000-00-00',
-  `ends` date NOT NULL default '0000-00-00',
-  `fee` int(11) default '0',
-  `winner_id` int(10) unsigned default NULL,
-  `note` varchar(100) default NULL,
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `id` (`id`,`tour_id`)
+DROP TABLE IF EXISTS events;
+CREATE TABLE IF NOT EXISTS events (
+  id int(10) unsigned NOT NULL auto_increment,
+  type enum('robin','tree','ongoing','robin+tree') NOT NULL default 'robin',
+  tour_id int(10) unsigned NOT NULL default '0',
+  title varchar(40) NOT NULL default '',
+  starts date NOT NULL default '0000-00-00',
+  ends date NOT NULL default '0000-00-00',
+  fee int(11) default '0',
+  winner_id int(10) unsigned default NULL,
+  note varchar(100) default NULL,
+  PRIMARY KEY  (id),
+  UNIQUE KEY id (id,tour_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 -- 
--- Dumping data for table `events`
+-- Dumping data for table events
 -- 
 
-INSERT INTO `events` (`id`, `type`, `tour_id`, `title`, `starts`, `ends`, `fee`, `winner_id`, `note`) VALUES 
+INSERT INTO events (id, type, tour_id, title, starts, ends, fee, winner_id, note) VALUES 
 (11, 'robin', 1, 'QuadRobin 2', '2004-05-01', '2004-05-01', 5, 1, 'Starts at 12:30 Indoor'),
 (12, 'robin', 1, 'QuadRobin 3', '2004-05-29', '2004-05-29', 5, 2, ''),
 (6, 'robin', 1, 'QuadRobin 1', '2004-04-24', '2004-04-24', 5, 3, 'Hail  Azril, great play !'),
@@ -118,30 +118,30 @@ INSERT INTO `events` (`id`, `type`, `tour_id`, `title`, `starts`, `ends`, `fee`,
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `matches`
+-- Table structure for table matches
 -- 
 
-DROP TABLE IF EXISTS `matches`;
-CREATE TABLE IF NOT EXISTS `matches` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `tour_id` int(10) unsigned NOT NULL default '0',
-  `event_id` int(10) unsigned NOT NULL default '0',
-  `player1_id` int(10) unsigned NOT NULL default '0',
-  `player2_id` int(10) unsigned NOT NULL default '0',
-  `winner_id` int(10) unsigned default NULL,
-  `score` varchar(30) default NULL,
-  `status` enum('scheduled','complete','due','void') NOT NULL default 'due',
-  `date` datetime default '0000-00-00 00:00:00',
-  `reporter_id` int(10) unsigned default NULL,
-  `note` varchar(200) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=73 ;
+DROP TABLE IF EXISTS matches;
+CREATE TABLE IF NOT EXISTS matches (
+  id int(10) unsigned NOT NULL auto_increment,
+  tour_id int(10) unsigned NOT NULL default '0',
+  event_id int(10) unsigned NOT NULL default '0',
+  player1_id int(10) unsigned NOT NULL default '0',
+  player2_id int(10) unsigned NOT NULL default '0',
+  winner_id int(10) unsigned default NULL,
+  score varchar(30) default NULL,
+  status enum('scheduled','complete','due','void') NOT NULL default 'due',
+  date datetime default '0000-00-00 00:00:00',
+  reporter_id int(10) unsigned default NULL,
+  note varchar(200) default NULL,
+  PRIMARY KEY  (id)
+); 
 
 -- 
--- Dumping data for table `matches`
+-- Dumping data for table matches
 -- 
 
-INSERT INTO `matches` (`id`, `tour_id`, `event_id`, `player1_id`, `player2_id`, `winner_id`, `score`, `status`, `date`, `reporter_id`, `note`) VALUES 
+INSERT INTO matches (id, tour_id, event_id, player1_id, player2_id, winner_id, score, status, date, reporter_id, note) VALUES 
 (17, 2, 10, 30, 32, 32, '2:6 5:7', 'complete', '2004-02-17 20:00:00', 1, 'We''re on right track'),
 (16, 2, 10, 30, 32, 32, '3:6 1:6', 'complete', '2004-02-06 12:00:00', 1, 'Azril: I''m alive&kicking !'),
 (9, 2, 10, 30, 32, 32, '6:2 7:5', 'complete', '2003-11-18 20:00:00', 1, NULL),
@@ -200,30 +200,30 @@ INSERT INTO `matches` (`id`, `tour_id`, `event_id`, `player1_id`, `player2_id`, 
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `players`
+-- Table structure for table players
 -- 
 
-DROP TABLE IF EXISTS `players`;
-CREATE TABLE IF NOT EXISTS `players` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `type` enum('doubles','singles') NOT NULL default 'singles',
-  `firstname` varchar(20) NOT NULL default '',
-  `lastname` varchar(20) NOT NULL default '',
-  `phone_w` varchar(15) default NULL,
-  `phone_m` varchar(10) default NULL,
-  `phone_h` varchar(10) default NULL,
-  `email1` varchar(30) default NULL,
-  `email2` varchar(30) default NULL,
-  `sex` enum('men','ladies','boys','girls','mixed') NOT NULL default 'men',
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `firstname` (`firstname`,`lastname`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+DROP TABLE IF EXISTS players;
+CREATE TABLE IF NOT EXISTS players (
+  id int(10) unsigned NOT NULL auto_increment,
+  type enum('doubles','singles') NOT NULL default 'singles',
+  firstname varchar(20) NOT NULL default '',
+  lastname varchar(20) NOT NULL default '',
+  phone_w varchar(15) default NULL,
+  phone_m varchar(10) default NULL,
+  phone_h varchar(10) default NULL,
+  email1 varchar(30) default NULL,
+  email2 varchar(30) default NULL,
+  sex enum('men','ladies','boys','girls','mixed') NOT NULL default 'men',
+  PRIMARY KEY  (id),
+  UNIQUE KEY firstname (firstname,lastname)
+); 
 
 -- 
--- Dumping data for table `players`
+-- Dumping data for table players
 -- 
 
-INSERT INTO `players` (`id`, `type`, `firstname`, `lastname`, `phone_w`, `phone_m`, `phone_h`, `email1`, `email2`, `sex`) VALUES 
+INSERT INTO players (id, type, firstname, lastname, phone_w, phone_m, phone_h, email1, email2, sex) VALUES 
 (1, 'singles', 'Eugene', 'Kirillov', '9054132683', '4164197792', '9057618655', 'cyrilcanada@yahoo.com', 'eugene@cyrilcanada.com', 'men'),
 (2, 'singles', 'Yuri', 'Kotik', NULL, '4164520755', '9055088774', 'yuri.kotik@rbc.com', NULL, 'men'),
 (3, 'singles', 'Azril', 'Rom', '4167890602x229', '9058815565', '4164537691', 'arom@dominionroofing.com', 'romfamily@rogers.com', 'men'),
@@ -245,22 +245,22 @@ INSERT INTO `players` (`id`, `type`, `firstname`, `lastname`, `phone_w`, `phone_
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `roster`
+-- Table structure for table roster
 -- 
 
-DROP TABLE IF EXISTS `roster`;
-CREATE TABLE IF NOT EXISTS `roster` (
-  `tour_id` int(10) unsigned NOT NULL default '0',
-  `player_id` int(10) unsigned NOT NULL default '0',
-  `handicap` int(10) unsigned zerofill default NULL,
-  PRIMARY KEY  (`player_id`,`tour_id`)
+DROP TABLE IF EXISTS roster;
+CREATE TABLE IF NOT EXISTS roster (
+  tour_id int(10) unsigned NOT NULL default '0',
+  player_id int(10) unsigned NOT NULL default '0',
+  handicap int(10) unsigned zerofill default NULL,
+  PRIMARY KEY  (player_id,tour_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- 
--- Dumping data for table `roster`
+-- Dumping data for table roster
 -- 
 
-INSERT INTO `roster` (`tour_id`, `player_id`, `handicap`) VALUES 
+INSERT INTO roster (tour_id, player_id, handicap) VALUES 
 (1, 1, NULL),
 (1, 2, NULL),
 (1, 17, NULL),
@@ -279,27 +279,27 @@ INSERT INTO `roster` (`tour_id`, `player_id`, `handicap`) VALUES
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `tours`
+-- Table structure for table tours
 -- 
 
-DROP TABLE IF EXISTS `tours`;
-CREATE TABLE IF NOT EXISTS `tours` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `title` varchar(20) NOT NULL default '',
-  `description` varchar(30) default NULL,
-  `location` varchar(20) NOT NULL default '',
-  `email` varchar(30) default NULL,
-  `sex` enum('men','ladies','mixed','boys','girls') NOT NULL default 'men',
-  `type` enum('doubles','singles') NOT NULL default 'singles',
-  `level` enum('A','B','C','35+','45+','55+','OPEN') NOT NULL default 'A',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+DROP TABLE IF EXISTS tours;
+CREATE TABLE IF NOT EXISTS tours (
+  id int(10) unsigned NOT NULL auto_increment,
+  title varchar(20) NOT NULL default '',
+  description varchar(30) default NULL,
+  location varchar(20) NOT NULL default '',
+  email varchar(30) default NULL,
+  sex enum('men','ladies','mixed','boys','girls') NOT NULL default 'men',
+  type enum('doubles','singles') NOT NULL default 'singles',
+  level enum('A','B','C','35+','45+','55+','OPEN') NOT NULL default 'A',
+  PRIMARY KEY  (id)
+);
 
 -- 
--- Dumping data for table `tours`
+-- Dumping data for table tours
 -- 
 
-INSERT INTO `tours` (`id`, `title`, `description`, `location`, `email`, `sex`, `type`, `level`) VALUES 
+INSERT INTO tours (id, title, description, location, email, sex, type, level) VALUES 
 (1, 'Men A', 'Singles, Men  4.5', 'RHCC', 'eugene@cyrilcanada.com', 'men', 'singles', 'A'),
 (2, 'Mixed A', 'Doubles,Mixed , 4.0+', 'RHCC', 'eugene@cyrilcanada.com', 'mixed', 'doubles', 'A'),
 (3, 'Men B', 'Singles,Men  4.0', 'RHCC', NULL, 'men', 'singles', 'B'),
@@ -312,22 +312,22 @@ INSERT INTO `tours` (`id`, `title`, `description`, `location`, `email`, `sex`, `
 -- --------------------------------------------------------
 
 -- 
--- Table structure for table `users`
+-- Table structure for table users
 -- 
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `login` varchar(30) NOT NULL default '',
-  `password` varchar(64) default '',
-  `privilege` enum('developer','admin','member','guest') NOT NULL default 'guest',
-  PRIMARY KEY  (`login`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS users;
+CREATE TABLE IF NOT EXISTS users (
+  login varchar(30) NOT NULL default '',
+  password varchar(64) default '',
+  privilege enum('developer','admin','member','guest') NOT NULL default 'guest',
+  PRIMARY KEY  (login)
+)CHARSET=latin1;
 
 -- 
--- Dumping data for table `users`
+-- Dumping data for table users
 -- 
 
-INSERT INTO `users` (`login`, `password`, `privilege`) VALUES 
+INSERT INTO users (login, password, privilege) VALUES 
 ('eugene@cyrilcanada.com', '*A80082C9E4BB16D9C8E41B0D7EED46126DF4A46E', 'member'),
 ('dev', '2c20d5bd6ff371fc', 'developer'),
 ('admin', '*A80082C9E4BB16D9C8E41B0D7EED46126DF4A46E', 'admin'),

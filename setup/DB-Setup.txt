@@ -2,7 +2,7 @@ mysql --user root mysql --password
 Enter password:
 public
 
-GRANT ALL PRIVILEGES ON *.* to eugene@"%" identified by 'public' with grant option;
+ GRANT ALL PRIVILEGES ON *.* to eugene@"%" identified by 'public' with grant option;
 
 GRANT ALL PRIVILEGES ON *.* to root@"%" identified by 'public' with grant option;
 
