@@ -76,7 +76,7 @@ switch ($action)
 
     break;
   }
-  case 'new':
+  case 'new':   //Create new match
   {
     $form = new TableForm("$table");
 
