@@ -1,5 +1,4 @@
 <?
-// ToDo
 // Move everything to $cfg[]
 
 $server_name=getenv('SERVER_NAME');
